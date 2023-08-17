@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tasks_cx/core/components/c_text_button.dart';
 import 'package:tasks_cx/core/components/c_text_field.dart';
-import 'package:tasks_cx/core/di/di.dart';
+import 'package:tasks_cx/core/di/riverpod_di.dart';
 
 class EmailAuthScreen extends ConsumerWidget {
   const EmailAuthScreen({super.key});
@@ -20,14 +20,18 @@ class EmailAuthScreen extends ConsumerWidget {
           CustomTextField(
             controller: emailController,
             hintText: 'Enter your email',
+            errorText:
+                emailNotifier.hasError ? emailNotifier.error.toString() : null,
           ),
           CustomApiCallButton(
-            onPressed: () => emailNotifier.isLoading
-                ? null
-                : ref
-                    .read(emailAuthProvider.notifier)
-                    .submitEmail(emailController.text),
-            apiProvider: emailAuthProvider,
+            onLoading: null,
+            onData: () => ref
+                .read(emailAuthProvider.notifier)
+                .submitEmail(emailController.text),
+            onError: () => ref
+                .read(emailAuthProvider.notifier)
+                .submitEmail(emailController.text),
+            apiNotifier: emailAuthProvider,
             text: emailNotifier.isLoading
                 ? const CircularProgressIndicator()
                 : const Text('Submit'),
