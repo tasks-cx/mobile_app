@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tasks_cx/core/di/states/api_call_states.dart';
-
-import '../di/notifiers/email_auth.dart';
 
 class CustomApiCallButton extends ConsumerStatefulWidget {
-  final VoidCallback onPressed;
+  // final VoidCallback? onPressed;
   final Widget text;
-  final NotifierProvider<EmailAuthNotifier, AsyncValue<void>> apiProvider;
+  final NotifierProvider<dynamic, AsyncValue<void>> apiNotifier;
+  final VoidCallback? onLoading;
+  final VoidCallback? onError;
+  final VoidCallback? onData;
   const CustomApiCallButton({
     super.key,
-    required this.onPressed,
     required this.text,
-    required this.apiProvider,
+    required this.apiNotifier,
+    required this.onData,
+    required this.onError,
+    required this.onLoading,
   });
 
   @override
@@ -23,10 +25,11 @@ class CustomApiCallButton extends ConsumerStatefulWidget {
 class _CustomApiCallButtonState extends ConsumerState<CustomApiCallButton> {
   @override
   Widget build(BuildContext context) {
-    final apiNotifier = ref.watch(widget.apiProvider);
     return TextButton(
-      onPressed: widget.onPressed,
-      child: apiNotifier.when(
+      onPressed: ref.watch(widget.apiNotifier).isLoading
+          ? widget.onLoading
+          : widget.onData,
+      child: ref.watch(widget.apiNotifier).when(
         data: (data) {
           return widget.text;
         },
