@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tasks_cx/core/components/c_text_button.dart';
 import 'package:tasks_cx/core/components/c_text_field.dart';
 import 'package:tasks_cx/core/di/riverpod_di.dart';
+import 'package:tasks_cx/screens/otp_verification_screen.dart';
 
 class EmailAuthScreen extends ConsumerWidget {
   const EmailAuthScreen({super.key});
@@ -10,6 +11,18 @@ class EmailAuthScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final emailController = TextEditingController();
     final emailNotifier = ref.watch(emailAuthProvider);
+    ref.listen(
+      emailAuthProvider,
+      (previous, next) {
+        if (next is AsyncData) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const OtpVerificationScreen(),
+            ),
+          );
+        }
+      },
+    );
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
