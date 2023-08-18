@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tasks_cx/core/components/project_tile.dart';
 import 'package:tasks_cx/core/data/member.dart';
-import 'package:tasks_cx/screens/add_project_screen.dart';
+import 'package:tasks_cx/screens/projects/add_project_screen.dart';
 import 'package:uuid/uuid.dart';
 
-import '../core/data/project_model.dart';
+import '../../core/data/project_model.dart';
 
 class AllProjectsScreen extends StatelessWidget {
   const AllProjectsScreen({super.key});
@@ -50,6 +50,7 @@ class AllProjectsScreen extends StatelessWidget {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   return ProjectTile(
+                    
                     project: snapshot.data![index],
                   );
                 },

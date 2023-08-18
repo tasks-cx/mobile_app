@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasks_cx/core/components/c_text_field.dart';
 
-import '../core/utils/utils.dart';
+import '../../core/utils/utils.dart';
 
 class AddProjectScreen extends StatefulWidget {
   const AddProjectScreen({super.key});
@@ -75,31 +75,33 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               ],
             ),
             vspace1,
-            ...addedLinkListController.map((e) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextField(
-                          controller: e,
-                          hintText: "Link",
-                        ),
+            ...addedLinkListController.map(
+              (e) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        controller: e,
+                        hintText: "Link",
                       ),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            addedLinkListController.remove(e);
-                          });
-                        },
-                        icon: const Icon(Icons.remove),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.purple.shade50),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          addedLinkListController.remove(e);
+                        });
+                      },
+                      icon: const Icon(Icons.remove),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.purple.shade50),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
             vspace1,
             Row(
               children: [

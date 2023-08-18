@@ -17,7 +17,8 @@ class EmailAuthScreen extends ConsumerWidget {
         if (next is AsyncData) {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => const OtpVerificationScreen(),
+              builder: (_) =>
+                  OtpVerificationScreen(email: emailController.text),
             ),
           );
         }

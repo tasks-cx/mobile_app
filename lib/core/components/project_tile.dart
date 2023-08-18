@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasks_cx/core/data/project_model.dart';
+import 'package:tasks_cx/screens/tasks/all_tasks_screen.dart';
 
 class ProjectTile extends StatelessWidget {
   final Project project;
@@ -12,7 +13,7 @@ class ProjectTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        
+        AllTasksScreen();
       },
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -30,7 +31,7 @@ class ProjectTile extends StatelessWidget {
       ),
       trailing: CircleAvatar(
         child: Text(project.creator.username[0]),
-      ), 
+      ),
     );
   }
 }
