@@ -17,10 +17,13 @@ class EmailAuthNotifier extends Notifier<AsyncValue<void>> {
       state = AsyncValue.error("Invalid email", StackTrace.current);
     } else {
       // TODO: Change the logic to send email for auth
-      final response = await Future.delayed(const Duration(seconds: 2));
+      final response = await Future.delayed(const Duration(seconds: 2)).then(
+        (value) => 'success',
+      );
       if (response == 'error') {
         state = AsyncValue.error("error", StackTrace.current);
       } else {
+        // TODO: setup local user data.
         state = const AsyncValue.data(null);
       }
     }
